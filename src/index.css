@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .input-form {
+    @apply border border-black p-1.5 rounded-2xl;
+  }
+
+  .input-table {
+    @apply border border-black p-1.5 w-[9rem] rounded-2xl;
+  }
+}
