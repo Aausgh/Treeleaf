@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Form from '../components/Form';
 import Table from '../components/Table';
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
 
 const Home = () => {
 
@@ -42,12 +43,27 @@ const Home = () => {
       };
 
       const handleSubmit = (e) => {
+            e.preventDefault();
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(formData.email)) {
+                  e.preventDefault();
+                  toast.error('Please enter a valid email address.');
+                  return;
+            }
+
+            if (formData.pNumber.length < 7) {
+                  e.preventDefault();
+                  toast.error('Phone number must have at least 7 digits.');
+                  return;
+            }
 
             const key = `formData_${formData.id}`;
             localStorage.setItem(key, JSON.stringify(formData));
 
+            toast.success("Data saved successfully");
+
             setFormData({
-                  id: '',
                   userName: '',
                   email: '',
                   pNumber: '',
@@ -59,13 +75,11 @@ const Home = () => {
                         country: 'Nepal',
                   }
             });
-
       }
 
       const handleReset = () => {
 
             setFormData({
-                  id: '',
                   userName: '',
                   email: '',
                   pNumber: '',
@@ -74,9 +88,10 @@ const Home = () => {
                         city: '',
                         district: '',
                         province: '',
-                        country: 'Nepal',
                   }
             });
+
+            toast.success("Form reset successfull")
       };
 
 
@@ -96,6 +111,8 @@ const Home = () => {
 
             const key = `formData_${id}`;
             localStorage.removeItem(key);
+
+            toast.success("Data deleted successfully");
       };
 
       const handleEdit = (id, updatedData) => {
@@ -116,7 +133,6 @@ const Home = () => {
                                     city: updatedData.address.city,
                                     district: updatedData.address.district,
                                     province: updatedData.address.province,
-                                    country: 'Nepal'
                               },
                         };
                   }
@@ -124,6 +140,7 @@ const Home = () => {
             });
 
             setTableData(updatedTableData);
+
       };
 
 
@@ -150,7 +167,7 @@ const Home = () => {
                         </div>
 
                         <div className='p-3 ml-auto'>
-                              <button className='border border-black rounded-2xl text-xl w-52 h-10 bg-blue-600 text-white' onClick={() => navigate('/profile')}>
+                              <button className='border rounded-2xl text-xl w-52 h-10 bg-blue-600 text-white' onClick={() => navigate('/profile')}>
                                     Profile
                               </button>
                         </div>

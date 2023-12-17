@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-hot-toast'
 
 const Table = ({ tableData, handleDelete, handleEdit }) => {
+
+      // console.log(tableData)
 
       const [sortDirection, setSortDirection] = useState('asc');
       const [editingItemId, setEditingItemId] = useState(null);
@@ -22,14 +25,12 @@ const Table = ({ tableData, handleDelete, handleEdit }) => {
       };
 
       const handleSaveEdit = (id, updatedData) => {
-            // Call the handleEdit function from the parent component (Home)
             handleEdit(id, updatedData);
-            // Reset editing state
             setEditingItemId(null);
+            toast.success("Data edited successfully");
       };
 
       const handleCancelEdit = () => {
-            // Reset editing state
             setEditingItemId(null);
       };
 
@@ -52,7 +53,7 @@ const Table = ({ tableData, handleDelete, handleEdit }) => {
                               <th className='py-3 px-6'>Action</th>
                         </tr>
 
-                        <tr className='border-b'>
+                        <tr className='border-b bg-gray-100'>
                               <th></th>
                               <th></th>
                               <th></th>
@@ -66,7 +67,7 @@ const Table = ({ tableData, handleDelete, handleEdit }) => {
                   </thead>
                   <tbody>
                         {sortedTableData.map((data) => (
-                              <tr key={data.id} className='text-lg border-b'>
+                              <tr key={data.id} className='text-lg border-b odd:bg-white even:bg-gray-100'>
                                     <td className='py-4 px-6 capitalize'>{editingItemId === data.id ? (
                                           <input
                                                 type="text"
@@ -175,7 +176,7 @@ const Table = ({ tableData, handleDelete, handleEdit }) => {
                                     )}
                                     </td>
 
-                                    <td className='flex justify-around gap-2 px-6 py-3'>
+                                    <td className='flex justify-center items-center gap-2 px-6 py-3'>
                                           {editingItemId === data.id ? (
                                                 <>
                                                       <button

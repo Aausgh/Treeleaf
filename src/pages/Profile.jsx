@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Table from '../components/Table'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
 
 const Profile = () => {
 
@@ -24,6 +25,8 @@ const Profile = () => {
 
             const key = `formData_${id}`;
             localStorage.removeItem(key);
+
+            toast.success("Data deleted successfully");
       };
 
       const handleEdit = (id, updatedData) => {
@@ -61,7 +64,7 @@ const Profile = () => {
                   <h1 className='text-4xl text-center font-bold'>Profile</h1>
 
                   <div>
-                        <button className='border border-black rounded-2xl text-xl w-52 h-10 bg-blue-600 text-white' onClick={() => navigate('/')}>
+                        <button className='border rounded-2xl text-xl w-52 h-10 bg-blue-600 text-white' onClick={() => navigate('/')}>
                               Home
                         </button>
                   </div>

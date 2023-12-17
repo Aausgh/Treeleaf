@@ -64,6 +64,7 @@ const Form = ({ handleChange, handleSubmit, formData, handleReset, handleNestedC
                   <div className=' flex flex-col'>
 
                         <div className='w-full flex gap-8'>
+
                               <div className='w-[45%] flex flex-col mb-4'>
                                     <label htmlFor="city" className='text-lg font-medium ml-1.5'>City</label>
                                     <input
@@ -125,11 +126,17 @@ const Form = ({ handleChange, handleSubmit, formData, handleReset, handleNestedC
 
 
                   <div className='flex justify-around gap-2'>
-                        <button className='border border-black rounded-2xl text-xl w-52 h-10 bg-blue-600 text-white' type='submit'>
+                        <button
+                              className='border rounded-2xl text-xl w-52 h-10 bg-blue-600 text-white'
+                              type='submit'
+                        >
                               Save
                         </button>
 
-                        <button className='border border-black rounded-2xl text-xl w-52 bg-red-600 text-white' type='button' onClick={handleReset}>
+                        <button className='border rounded-2xl text-xl w-52 bg-red-600 text-white'
+                              type='button'
+                              onClick={handleReset}
+                        >
                               Reset
                         </button>
                   </div>
